@@ -1,0 +1,8 @@
+*
+!cache
+!cache/.gitkeep
+!logs
+!logs/.gitkeep
+!doctrine/migrations
+!doctrine/migrations/.gitkeep
+!.gitignore

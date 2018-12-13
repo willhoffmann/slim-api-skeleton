@@ -1,0 +1,29 @@
+version: '3'
+services:
+  apache-php7:
+    image: willhoffmann/docker-apache-php7
+    container_name: slimskel-webserver
+    ports:
+      - "80:80"
+    volumes:
+      - ./:/var/www/html
+      - ./data/logs:/var/www/logs
+      - ./devops/docker/webserver/apache2.conf:/etc/apache2/apache2.conf
+      - ./devops/docker/webserver/001-slimskel.conf:/etc/apache2/sites-enabled/000-default.conf
+    links:
+      - mysql
+  mysql:
+    image: mysql:5.7
+    container_name: slimskel-mysql
+    ports:
+      - "3306:3306"
+    volumes:
+      - slimskel-mysql-data:/var/lib/mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_DATABASE=slimskel_app
+      - MYSQL_USER=slimskel
+      - MYSQL_PASSWORD=slimskel
+volumes:
+  slimskel-mysql-data:
+    driver: local

@@ -1,0 +1,18 @@
+# Editors, IDEs
+nbproject
+.buildpath
+.idea
+.vs
+*.sublime-project
+*.sublime-workspace
+_old/
+
+# Composer related
+/vendor/
+composer.lock
+
+# Testing
+build
+
+# Build automation related
+.env
