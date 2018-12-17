@@ -22,7 +22,7 @@ return [
         'doctrine' => [
             'meta' => [
                 'entity_path' => [
-                    'src/Entity'
+                    'src/App/Entity'
                 ],
                 'auto_generate_proxies' => true,
                 'proxy_dir' => __DIR__ . '/../data/doctrine/proxy',
