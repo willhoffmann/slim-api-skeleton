@@ -26,9 +26,9 @@ class User
     /**
      * @var string
      *
-     * @ORM\Column(name="username", type="string", length=100, nullable=false)
+     * @ORM\Column(name="name", type="string", length=100, nullable=false)
      */
-    protected $username;
+    protected $name;
 
     /**
      * @var string
@@ -40,7 +40,7 @@ class User
     /**
      * @var string
      *
-     * @ORM\Column(name="password", type="string", length=140, nullable=false)
+     * @ORM\Column(name="password", type="string", length=140)
      */
     protected $password;
 
@@ -82,15 +82,15 @@ class User
     }
 
     /**
-     * Set username
+     * Set name
      *
      * @param string $username
      *
      * @return User
      */
-    public function setUsername($username)
+    public function setName($name)
     {
-        $this->username = $username;
+        $this->name = $name;
 
         return $this;
     }
@@ -100,9 +100,9 @@ class User
      *
      * @return string
      */
-    public function getUsername()
+    public function getName()
     {
-        return $this->username;
+        return $this->name;
     }
 
     /**
@@ -248,5 +248,16 @@ class User
     public function getUpdatedAt()
     {
         return $this->updatedAt;
+    }
+
+    /**
+     * Removes sensitive data from the user.
+     *
+     * This is important if, at any given point, sensitive information like
+     * the plain-text password is stored on this object.
+     */
+    public function eraseCredentials()
+    {
+        return $this->plainPassword = null;
     }
 }

@@ -15,3 +15,26 @@ $container['logger'] = function ($c) {
     }
     return $logger;
 };
+
+// Entity Manager
+$container['entityManager'] = function ($c) {
+    $settings = $c->get('settings')['doctrine'];
+    $config = \Doctrine\ORM\Tools\Setup::createAnnotationMetadataConfiguration(
+        $settings['meta']['entity_path'],
+        $settings['meta']['auto_generate_proxies'],
+        $settings['meta']['proxy_dir'],
+        $settings['meta']['cache'],
+        false
+    );
+    $entityManager = \Doctrine\ORM\EntityManager::create($settings['connection'], $config);
+
+    return $entityManager;
+};
+
+// Controller
+$container[\App\Controller\UserController::class] = function (\Slim\Container $container) {
+    $service = new \App\Service\UserService($container);
+    $userController = new \App\Controller\UserController($container, $service);
+
+    return $userController;
+};

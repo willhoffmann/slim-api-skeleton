@@ -17,8 +17,8 @@ class JsonResponse
     public static function setErrorJson(Response $response, $errorMessages, $statusCode = 400): Response
     {
         $data = [
-            'status' => 'error',
-            'errors' => $errorMessages,
+            'code'    => $statusCode,
+            'message' => $errorMessages,
         ];
 
         return $response->withJson($data, $statusCode);
@@ -28,27 +28,12 @@ class JsonResponse
      * Set success json
      *
      * @param Response $response
-     * @param null $messages
-     * @param null $data
+     * @param $content
      * @param int $statusCode
      * @return Response
      */
-    public static function setSuccessJson(
-        Response $response,
-        $messages = null,
-        $data = null,
-        $statusCode = 200
-    ): Response {
-        $jsonData = ['status' => 'success'];
-
-        if ($data) {
-            $jsonData['data'] = $data;
-        }
-
-        if ($messages) {
-            $jsonData['messages'] = $messages;
-        }
-
-        return $response->withJson($jsonData, $statusCode);
+    public static function setSuccessJson(Response $response, $content, $statusCode = 200) : Response
+    {
+        return $response->withJson($content, $statusCode);
     }
 }
